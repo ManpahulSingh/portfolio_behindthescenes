@@ -5,20 +5,20 @@ import aPages from "../pages/index.js";
 import aItems from "../items/index.js";
 
 class Page {
-    constructor(){
-        this.sName = "Richard Hildred";
+    constructor() {
+        this.sName = "Manpahul Singh";
         const sBase = document.location.pathname;
-        if(sBase[sBase.length - 1] == "/"){
-            this.sBase = sBase.substr(0, sBase.length -1);
-        }else{
+        if (sBase[sBase.length - 1] == "/") {
+            this.sBase = sBase.substr(0, sBase.length - 1);
+        } else {
             const sFile = '/' + document.location.pathname.split('/').pop();
-            this.sBase = sBase.substr(0, sBase.length - sFile.length); 
+            this.sBase = sBase.substr(0, sBase.length - sFile.length);
         }
     }
-    getImageSrc(sImage){
-        if(sImage.match(/\:\/\//)){
+    getImageSrc(sImage) {
+        if (sImage.match(/\:\/\//)) {
             return sImage;
-        }else{
+        } else {
             return this.sBase + sImage;
         }
     }
@@ -27,12 +27,12 @@ class Page {
     }
 }
 
-class Items extends Page{
+class Items extends Page {
     constructor(oItems) {
         super();
         this.oItems = oItems;
         this.nCurrentItem = 0;
-        $("article#items").click((evt) =>{
+        $("article#items").click((evt) => {
             evt.preventDefault();
             this.nCurrentItem = evt.target.id[4];
             $("article#current").html("");
@@ -40,7 +40,7 @@ class Items extends Page{
             this.render();
         });
     }
-    render(){
+    render() {
         $("article#current").append(`
             <div class="itemImage"><img src="${this.getImageSrc(this.oItems[this.nCurrentItem].specialImage)}" /></div>
         `);
@@ -50,13 +50,13 @@ class Items extends Page{
             `)
 
         })
-        for(let n = 0; n < this.oItems.length; n++){
-            if(n != this.nCurrentItem){
+        for (let n = 0; n < this.oItems.length; n++) {
+            if (n != this.nCurrentItem) {
                 $("article#items").append(`
                 <div class="item"><a class="itemLink" href="#">
                 <img id="item${n}" src="${this.getImageSrc(this.oItems[n].specialImage)}" /></a></div>
                 `);
-           }
+            }
         }
     }
 

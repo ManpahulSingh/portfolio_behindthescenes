@@ -1,1 +1,3 @@
-this would be the index page
+# Welcome
+
+Welcome to my portfolio 
